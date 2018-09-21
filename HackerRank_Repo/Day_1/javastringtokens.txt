@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String s = scan.nextLine();
+        String[] tokens = new String[s.length()];
+        int i=0;
+        String noSpecialCharacters = s.replaceAll("[^a-zA-Z0-9\\s\\']","");
+        StringTokenizer st1 = new StringTokenizer(noSpecialCharacters, " "); 
+        while (st1.hasMoreTokens()){
+            String x = st1.nextToken();
+            if(x.contains("\'")){
+                x = x.replaceAll("\'"," ");
+                StringTokenizer st2 = new StringTokenizer(x, " ");
+                while(st2.hasMoreTokens()){
+                    x = st2.nextToken();
+                    tokens[i]=x;
+                    i++;
+                }
+            }else{
+                    tokens[i]=x;
+                     i++;
+            }
+            
+        }
+        System.out.println(i);
+        for(int j=0;j<tokens.length;j++){
+            if(tokens[j]!=null)
+            System.out.println(tokens[j]);
+        }
+
+        scan.close();
+    }
+}
+
