@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution{
+	public static void main(String[] args){
+		
+        boolean found = false;
+		Scanner in = new Scanner(System.in);
+		int testCases = Integer.parseInt(in.nextLine());
+		while(testCases>0){
+            String input = in.ntrainiextLine();
+			String regex = "<(.+)>([^<]+)</\\1>";
+          	Pattern p = Pattern.compile(regex);
+            Matcher m = p.matcher(input);
+            while(m.find()){
+                    found = true;
+                    System.out.println(m.group(2));
+            }
+             if(m.group(2)==""){
+                   System.out.println("None");
+               }
+            
+			testCases--;
+		} // while(testCases>0);
+	}
+}
+
+
+
