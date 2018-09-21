@@ -1,0 +1,13 @@
+import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.DayOfWeek;
+public class Solution{
+    static DayOfWeek  getDay(String day, String month, String year){  
+        
+        int yy = Integer.parseInt(year);
+        int mm = Integer.parseInt(month);
+        int dd = Integer.parseInt(day);
+      
+        LocalDate date = LocalDate.of(yy, mm, dd);
+        return date.getDayOfWeek();  
+    }  
