@@ -1,0 +1,16 @@
+class Add
+{
+    static void add(int...input)
+    {
+        int sum = 0;
+        for(int num:input)
+        {
+            if(sum !=0){
+                System.out.print("+");
+            }
+            sum+=num;
+            System.out.print(num);
+        }
+        System.out.println("="+sum);
+    }
+}
