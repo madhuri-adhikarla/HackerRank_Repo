@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner scanner=new Scanner(System.in);
+        String password=scanner.next();
+        try{
+             MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] passwordBytes = md.digest(password.getBytes());
+            StringBuilder s = new StringBuilder();
+        for (byte b : passwordBytes) {
+            s.append(String.format("%02x", b));
+        }
+        System.out.println(s.toString());
+        }catch(Exception e){
+            System.out.println(e);
+        }
+          
+    }
+}
