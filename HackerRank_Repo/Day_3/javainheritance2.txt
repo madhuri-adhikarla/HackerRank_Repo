@@ -1,0 +1,10 @@
+class Arithmetic{
+    static int add(int x , int y){
+        int sum = x+y;
+        return sum;
+    }
+}
+
+class Adder extends Arithmetic{
+    
+}
