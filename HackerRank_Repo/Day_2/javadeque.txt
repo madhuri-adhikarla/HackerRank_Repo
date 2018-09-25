@@ -1,0 +1,44 @@
+
+    import java.util.*;
+    public class Solution {
+        public static void main(String[] args) {
+            Scanner in = new Scanner(System.in);
+            int n = in.nextInt();
+            int m = in.nextInt();
+            int[] num = new int[n];
+//          int[] size = new int[n];
+            int unique = 0;
+//            Deque deque = new ArrayDeque<>();
+            
+            for(int i=0;i<n;i++) {
+                num[i]=in.nextInt();
+            }
+            
+            for(int i=0;i<n-m+1;i++)
+            { 
+                Deque deque = new ArrayDeque<>();
+                 for(int j =i;j<i+m;j++){
+                    
+                     deque.add(num[j]);
+                 }
+                 
+                 HashSet<Integer> set=new HashSet<Integer>(deque);
+//                size[i] = set.size();
+                
+                if(unique < set.size())
+                    unique = set.size();
+            }
+            
+/*             for(int i=0;i<size.length;i++) {
+                if(unique<size[i]) {
+                    unique = size[i];
+                }
+            }           
+*/
+            
+            System.out.println(unique);
+        }
+    }
+
+
+
