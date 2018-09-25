@@ -1,0 +1,9 @@
+class Printer
+{
+   public static void  printArray(Object[] inputArray){
+       for( Object o : inputArray){
+           System.out.println(o);
+       }
+   }
+ 
+}
