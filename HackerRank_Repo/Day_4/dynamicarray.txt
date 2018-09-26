@@ -1,0 +1,36 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+         int n = sc.nextInt();
+        int q =  sc.nextInt();
+        int lastAnswer = 0;
+         List<Integer>[] al = new ArrayList[n];
+         
+         for(int i=0; i<al.length; i++)
+             al[i] = new ArrayList<Integer> ();
+         
+         for(int i=0;i<q;i++) {
+             int choose = sc.nextInt();
+             int x = sc.nextInt();
+             int y = sc.nextInt();
+             int index = (x^lastAnswer)%n;
+             if(choose == 1) {
+                al[index].add(y);
+             }else if(choose == 2) {
+                 int value = y%(al[index].size());
+                 lastAnswer = (int) al[index].get(value);
+                 System.out.println(lastAnswer);
+
+             }
+
+         }
+     
+     }
+
+}
