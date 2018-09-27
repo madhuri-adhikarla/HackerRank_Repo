@@ -1,0 +1,25 @@
+static int leftHeight = 0;
+static int rightHeight = 0;
+static int height(Node root){
+    if (root != null){
+        if (root.left != null){
+            leftHeight++;
+            height(root.left);
+        }
+        if (root.right != null){
+            rightHeight++;
+            height(root.right);
+        }
+    }
+
+    if(leftHeight>rightHeight){
+        return leftHeight;
+        
+    }else{
+        return rightHeight;
+    }
+    
+    
+    
+    
+    }
