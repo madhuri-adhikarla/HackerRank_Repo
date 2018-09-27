@@ -1,0 +1,24 @@
+/* you only have to complete the function given below.  
+Node is defined as  
+
+class Node {
+    int data;
+    Node left;
+    Node right;
+}
+
+*/
+
+    public static void preOrder(Node root) {
+        if(root==null){
+            return;
+        }
+        //preorder  - > root , left , right
+        
+        if(root !=  null) {
+            System.out.printf("%d ",root.data);
+            preOrder(root.left); // traverse left sub tree
+            preOrder(root.right);  // // traverse right sub tree
+        }
+        
+    }
