@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        PriorityQueue<Integer> heap=new PriorityQueue<Integer>(); // implementing heap variable
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        while(n-->0)
+            {
+            int key=sc.nextInt();
+             int data;
+            if(key==1) {
+                data=sc.nextInt();
+                heap.offer(data); // add data
+            }
+                 if(key==2) {
+                      data=sc.nextInt();
+                      heap.remove(data);
+                 }
+                if(key==3) {
+                    System.out.println(heap.peek());
+                }
+            } //while
+    }  //main
+}
