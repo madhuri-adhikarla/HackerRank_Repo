@@ -1,0 +1,37 @@
+import java.util.Scanner;
+import java.util.Stack;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Stack<Integer> stack = new Stack<Integer>();
+        int result = 0;
+        int N = sc.nextInt();
+        int[] A = new int[N];
+        for (int i = 0; i < A.length; i++) {
+            A[i] = sc.nextInt();
+        }
+        
+        for (int num : A) {
+            while (!stack.empty()) {
+                // System.out.println(stack.peek());
+                result = Math.max(result, operation(num, stack.peek()));
+                if (num < stack.peek()) {
+                    stack.pop();
+                } else {
+                    break;
+                }
+            }
+
+            stack.push(num);
+        }
+        
+        System.out.println(result);
+
+    }
+
+
+    static int operation(int x, int y) {
+        return ((x & y) ^ (x | y)) & (x ^ y);
+    }
+}
