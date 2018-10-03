@@ -1,0 +1,49 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.next());
+        int k =  Integer.parseInt(sc.next());
+        int sweetness =0;
+        sc.nextLine();
+        
+        ArrayList<Integer> al = new ArrayList<Integer>();
+        for(int i=0;i<n;i++) {
+            al.add(Integer.parseInt(sc.next()));
+        }
+        
+        Collections.sort(al);
+        // System.out.println(al);
+        
+        int counter = 0, i=0;
+        while (al.size() > 1 && al.get(i) <= k) {
+            int first = al.get(i);
+            int second = al.get(i+1);
+            ArrayList<Integer> subList = new ArrayList<Integer>();
+            subList.add(first);
+            subList.add(second);
+            
+            al.add(first + 2 * second);
+            counter++;
+            // al.removeAll(subList);
+            al.remove(al.indexOf(first));
+            al.remove(al.indexOf(second));
+            Collections.sort(al);
+            // System.out.println(al);
+
+
+        }
+        
+        if(al.size()<2 && al.get(i)<k) {
+            System.out.println("-1");
+        }
+        else
+            System.out.println(counter);
+
+       
+   }
+}
