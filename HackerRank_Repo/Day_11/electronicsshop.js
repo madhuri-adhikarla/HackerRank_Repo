@@ -27,26 +27,21 @@ function readLine() {
  */
 function getMoneySpent(keyboards, drives, b) {
     var res=[];
-    var k=0; var max =0;
+    var k=0; var max = -1;
     // console.log(keyboards[0]);
     // console.log(drives[0]);
     for(let i=0;i<keyboards.length;i++){
         for(let j=0;j<drives.length;j++) {
-          res[k]=keyboards[i]+drives[j];  
-            k++;
+          var sum =keyboards[i]+drives[j];  
+          if(sum <= b && sum > max) {
+                max = sum;
+            }
         }
     }
     // console.log(res);
     
-    for(let i=0;i<res.length;i++) {
-        if(max<res[i] && res[i]<=b) {
-            max= res[i];
-        }else{
-            max = -1;
-        }
-    }
     return max;
-    }
+}
 
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
