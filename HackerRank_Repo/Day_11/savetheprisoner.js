@@ -26,15 +26,12 @@ function readLine() {
 
 // Complete the saveThePrisoner function below.
 function saveThePrisoner(n, m, s) {
-    s= s-1;
-    while(m != 0)
-            {
-                m--;
-                s++;
-                if(s > n)
-                    s = 1;
-            }
-           return s;
+   var num = (s + (m - 1)) % n;
+    if(num==0)
+        return n;
+    else
+        return num;
+       
 }
 
 function main() {
