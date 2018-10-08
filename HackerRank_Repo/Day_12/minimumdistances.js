@@ -38,8 +38,9 @@ function minimumDistances(a) {
         if(result.length==0 || result === "undefined") {
             res=-1;
         } else {
-            result.sort();
-            res = result[0];
+            // result.sort();
+            
+            res = Math.min(...result);
         }
     return res;
 }
