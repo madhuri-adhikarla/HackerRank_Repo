@@ -29,16 +29,17 @@ function sum_digits_opt(n) {
 }
 // Complete the kaprekarNumbers function below.
 function kaprekarNumbers(p, q) {
-    let result = [];
-    for (var i = p; i <= q; i++) {
-        let d = i.toString().length;
-        let square = (i * i).toString();
-        let squarelen = square.length;
+    var result = [];
+    var val;
+    for (let i = p; i <= q; i++) {
+        var d = i.toString().length;
+        var square = (i * i).toString();
+        var squarelen = square.length;
         
-        let rhs = parseInt(square.substring(squarelen - d));
+        let val = parseInt(square.substring(squarelen - d));
         if (squarelen - d > 0) 
-            rhs += parseInt(square.substring(0, squarelen - d));
-        if (rhs == i) {
+            val += parseInt(square.substring(0, squarelen - d));
+        if (val == i) {
             result.push(i);
         }
     }
@@ -52,8 +53,6 @@ function kaprekarNumbers(p, q) {
 
 function main() {
     const p = parseInt(readLine(), 10);
-
     const q = parseInt(readLine(), 10);
-
     kaprekarNumbers(p, q);
 }
