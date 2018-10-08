@@ -26,24 +26,23 @@ function readLine() {
 
 // Complete the equalizeArray function below.
 function equalizeArray(arr) {
-    var count= new Int32Array(100);
-    for(let i=0;i<arr.length;i++)
-        {
-            for(let j=0;j<arr.length;j++)
-                {
-                    if(arr[j]==arr[i])
-                        {
-                            count[i]=count[i]+1;
-                        }
-                }
+    const counts = [];
+    let totalCount = 0;
+    let maxCount = 0;
+    for (let i = 0; i < arr.length; i++) {
+        const val = arr[i];
+        if (val in counts) {
+            counts[val] += 1;
+        } else {
+            counts[val] = 1;
         }
-    let x=Math.max(...count);
-    let y=arr.length-x;
-    // console.log(y);
-    return y;
-
-
+        totalCount += 1;
+        maxCount = Math.max(maxCount, counts[val]);
+    }
+    
+    return totalCount - maxCount;
 }
+
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
