@@ -26,17 +26,31 @@ function readLine() {
 
 // Complete the marsExploration function below.
 function marsExploration(s) {
-    var check = "SOS";
-    var count=0;
-    for(let i=0;i<s.length;i++) {
-        var val = s.charAt(i);
-        if(!check.includes(val)) {
-            count++;
+    var index = 1;
+    var count = 0;
+    for (var i = 0; i < s.length; i++){
+        if (index === 1){
+            if (s.charAt(i) != "S"){
+                count += 1;
+            }
+        } else if (index === 2) {
+            if (s.charAt(i) != "O"){
+                count += 1;
+            }
+        } else if (index === 3) {
+            if (s.charAt(i) != "S"){
+                count += 1;
+            }
         }
-        
+    
+        if (index === 3) {
+            index = 1;
+        } else {
+            index += 1;
+        }  
     }
-       
-    return count; 
+    // console.log(count);
+    return count;
 }
 
 function main() {
