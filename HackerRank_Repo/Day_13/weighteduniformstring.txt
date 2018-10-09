@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        int n = sc.nextInt();
+        Set<Integer> weights = new HashSet<Integer>();
+        char prev = s.charAt(0);
+        int sum = 0;
+        s=s.toLowerCase();
+        for(int i = 0; i < s.length(); i++){
+                if(s.charAt(i) != prev){
+                    prev = s.charAt(i);
+                    sum = 0;
+                }
+                sum += s.charAt(i)-'a'+1;
+            // System.out.println(sum);
+                weights.add(sum);
+        }
+        
+        
+        
+        for(int a0 = 0; a0 < n; a0++){
+            int x = sc.nextInt();
+            if(weights.contains(x)) {
+                System.out.println("Yes");
+            } else {
+                System.out.println("No");
+            }
+            
+        }
+    }
+}
