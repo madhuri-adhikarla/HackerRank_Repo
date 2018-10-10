@@ -25,32 +25,32 @@ function readLine() {
 }
 
 // Complete the jumpingOnClouds function below.
-function jumpingOnClouds(c, k) {
-    var energy = 100;
+function jumpingOnClouds(c) {
+    var count=0;
     var i=0;
-        while(i<c.length){
-        if(c[i]==1) {
-            energy=energy-1-2;
-        } else {
-            energy=energy-1;
+    while(i<c.length-1) {
+        if(c[i+2]!=1) {
+            i=i+2;
+            count++;
+        }else {
+            i=i+1;
+            count++;
         }
-            i=i+k;
+        if(i==c.length)
+            break;
     }
-    return energy;
+    return count;
+
 }
 
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
-    const nk = readLine().split(' ');
-
-    const n = parseInt(nk[0], 10);
-
-    const k = parseInt(nk[1], 10);
+    const n = parseInt(readLine(), 10);
 
     const c = readLine().split(' ').map(cTemp => parseInt(cTemp, 10));
 
-    let result = jumpingOnClouds(c, k);
+    let result = jumpingOnClouds(c);
 
     ws.write(result + "\n");
 
