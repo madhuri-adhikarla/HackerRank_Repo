@@ -7,30 +7,29 @@ import java.util.concurrent.*;
 import java.util.regex.*;
 
 public class Solution {
-    static int sherlockAndAnagrams(String s) {
-        int count=0;
-        for( int i=1;i<s.length();i++)
-        {
-            for(int k=0;k<s.length()-i;k++)
-            { 
-               String sub=s.substring(k,k+i); 
-            for( int j=k+1;j<=s.length()-i;j++)
-            {
-                String insub=s.substring(j,j+i);
-                    char[] a=sub.toCharArray();
-                    char[] b=insub.toCharArray();
-                    Arrays.sort(a);
-                    Arrays.sort(b);
-                    if(Arrays.equals(a,b)) {
-                     // System.out.println(sub+" ..."+insub);
-                     count++;
-                    }
-                }
-            }
-            } 
-        return count;
-    }
 
+  static int sherlockAndAnagrams(String s) {
+    int count = 0;
+    int limit = 1; //number of characters to be considered for a substring 1, 2 ,3..
+    while (limit < s.length()) {
+      for (int i = 0; i <= s.length() - limit; i++) {
+        char[] compare = s.substring(i, i + limit).toCharArray();
+        Arrays.sort(compare);
+        for (int j = i + 1; j <= s.length() - limit; j++) {
+          char[] possible = s.substring(j, j + limit).toCharArray();
+          Arrays.sort(possible);
+          if (Arrays.equals(compare, possible)) {
+            count++;
+          }  //if
+        }    //for (j)
+      }      //for(i)
+      limit++;
+    }     //while
+
+    return count;
+
+    }
+    
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
