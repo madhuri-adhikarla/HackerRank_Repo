@@ -27,17 +27,21 @@ function readLine() {
 // Complete the runningTime function below.
 function runningTime(arr) {
     var numShifts = 0;
-    for ( var i = 1; i < arr.length; i++ ) {
-        var value = arr[i];
-        var j = i - 1;
-        while( j >= 0 && value < arr[j] ) {
-            arr[i] = arr[j];
-            arr[j] = value;
-            numShifts += 1;
-            j -= 1;
-            i -= 1;
-        }
-    }
+    for(let i=0;i<arr.length-1;i++) {
+          var j = i+1;
+          while(j>0) {
+            if(arr[j]<arr[j-1]) {
+              var temp = arr[j];
+              arr[j] = arr[j-1];
+              arr[j-1] = temp;
+              numShifts++;
+              j--;
+            } else {
+                break;
+            }
+          }
+          console.log(arr.join(' '));
+   }
     return numShifts;
 }
 
