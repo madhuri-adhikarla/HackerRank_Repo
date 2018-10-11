@@ -25,24 +25,33 @@ function readLine() {
 }
 
 // Complete the closestNumbers function below.
-function closestNumbers(arr) {
-    arr.sort(function(a,b){return a-b;});
-    var op=[];
-    for(var i=0;i<arr.length-1;i++) {
-        op.push(arr[i+1]-arr[i]);
-    }
-    var min=Math.min.apply(null,op);
-    var result=[];
-    for(var i=0;i<op.length;i++) {
-        if(op[i]==min) {
+function closestNumbers(arr ,n) {
+   arr.sort(function (a, b) { return a - b;});
+    
+    var results = [];
+    var dif = 0;
+    var min = Number.MAX_SAFE_INTEGER;
+    
+    for (var i = 1; i < n; i++) {
+        
+        dif = arr[i] - arr[i - 1];
+        
+        if (dif <= min) {
             
-            result.push(arr[i]);
-            result.push(arr[i+1]);
-    
+            if (dif < min) results = [];
+            
+            results.push(arr[i-1]);
+            results.push(arr[i]);
+            
+            min = dif;
+            
         }
+        
     }
     
-return result;
+   return results;
+    
+    
 }
 
 function main() {
@@ -52,7 +61,7 @@ function main() {
 
     const arr = readLine().split(' ').map(arrTemp => parseInt(arrTemp, 10));
 
-    let result = closestNumbers(arr);
+    let result = closestNumbers(arr,n);
 
     ws.write(result.join(" ") + "\n");
 
