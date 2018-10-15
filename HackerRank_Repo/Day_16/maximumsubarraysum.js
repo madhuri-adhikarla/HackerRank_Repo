@@ -25,31 +25,25 @@ function readLine() {
 }
 
 // Complete the maximumSum function below.
-function maximumSum(arr, m, n) {
-    var temp=0,max=0;
-    
-    for(let i = 0; i < n; i++) {
-            for(let j = i-1; j >= 0; j--) {
-                temp = (arr[i] - arr[j] + m) % m;
-                if(temp > max) 
-                    max = temp;
-
-                if(max == (m-1)) 
-                    return max;
-            }
-            
-            temp = arr[i]; 
-            
-            if(temp > max) 
-                max = temp;
-            
-            if(max == (m-1)) 
-                return max;
-        }
-        
-        return max;
-
-   }
+function maximumSum(a, m) {
+    var result = [];
+    var max=0;a
+     var sum=0;
+     for (let i=0; i <a.length; i++) { 
+            for (let j=i; j<a.length; j++) { 
+                for (let k=i; k<=j; k++) 
+                    sum += a[k]; 
+                result.push(sum);
+                sum=0;
+            } 
+        } 
+    for(let i=0;i<result.length;i++) {
+        result[i] = result[i]%m;
+        if(max<result[i])
+            max = result[i];
+    }
+    return max;
+}
 
 function main() {
     const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
@@ -65,7 +59,7 @@ function main() {
 
         const a = readLine().split(' ').map(aTemp => parseInt(aTemp, 10));
 
-        let result = maximumSum(a, m, n);
+        let result = maximumSum(a, m);
 
         ws.write(result + "\n");
     }
