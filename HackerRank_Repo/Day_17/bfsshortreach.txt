@@ -1,0 +1,68 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the bfs function below.
+   public static int[] BFS(int start, int[][] mmp){
+
+    int[] result = new int[mmp.length];
+    for (int i=0; i<result.length; i++)
+        result[i] = -1;
+
+    Queue<Integer> q = new LinkedList<Integer>();
+
+    q.add(start);
+    result[start] = 0;
+    while(!q.isEmpty()){
+
+        int next = q.remove();
+
+        for (int i=0; i < mmp.length; i++){
+            if (mmp[next][i] == 1 && result[i] == -1){
+                result[i] = result[next] + 1;
+                q.add(i);
+            }
+        }
+    }
+
+    return result;
+}
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        int problems = in.nextInt();
+
+        for (int i=0; i < problems; i++){
+            int N = in.nextInt();
+            int M = in.nextInt();
+
+            int[][] mmp = new int[N][N];
+
+            for (int j=0; j<M; j++){
+                int u = in.nextInt()-1;
+                int v = in.nextInt()-1;
+                mmp[u][v] = 1;
+                mmp[v][u] = 1;
+            }
+
+            int start = in.nextInt()-1;
+
+            int [] result = BFS(start, mmp);
+            for(int j=0; j < result.length; j++){
+                if (result[j] == -1)
+                    System.out.print(result[j] + " ");
+                else if (result[j] != 0)
+                    System.out.print(result[j] * 6 + " ");
+            }
+            System.out.println("");
+
+        }
+    }
+}
