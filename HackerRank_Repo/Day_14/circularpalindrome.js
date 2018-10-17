@@ -61,11 +61,6 @@ function rotatePacked(packed) {
 }
 
 
-
-
-
-
-
 function processData(input) {
     //Enter your code here
     const str = input.split('\n')[1];
