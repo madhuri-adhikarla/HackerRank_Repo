@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner scr = new Scanner(System.in);
+        String s = scr.nextLine();
+        scr.close();
+        int sLength = s.length();
+
+        int max = 0;
+
+        for (int i = 0; i < sLength; i++) {
+            String str = s.substring(0, i+1);
+            String temp = new String(s);
+            int count = 0;
+            int index = s.indexOf(str);
+            while (index != -1) {
+                count++;
+
+                if (temp.length() > 0) {
+                    temp = temp.substring(index + 1);
+                    index = temp.indexOf(str);
+                } else {
+                    index = -1;
+                }
+            }
+            if (count * str.length() > max) {
+                max = count * str.length();
+            }
+        }
+
+        System.out.println("" + max);
+
+    }
+}
