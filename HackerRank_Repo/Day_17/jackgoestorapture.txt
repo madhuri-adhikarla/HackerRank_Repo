@@ -1,0 +1,50 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int e = sc.nextInt();
+        HashMap<Long, HashSet<Long>> g = new HashMap<Long, HashSet<Long>>();
+        for (int i = 0; i < e; i++) {
+            long u = sc.nextLong();
+            long v = sc.nextLong();
+            long w = sc.nextLong();
+            if (!g.containsKey(u))
+                g.put(u, new HashSet<Long>());
+            if (!g.containsKey(v))
+                g.put(v, new HashSet<Long>());
+            g.get(u).add(w*Integer.MAX_VALUE+v);
+            g.get(v).add(w*Integer.MAX_VALUE+u);
+        }
+        
+        PriorityQueue<Long> pq = new PriorityQueue<Long>();
+        pq.add(1l);
+        HashSet<Long> visited = new HashSet<Long>();
+        while (!pq.isEmpty()) {
+            long l = pq.remove();
+            long u = l%Integer.MAX_VALUE;
+            long w = l/Integer.MAX_VALUE;
+            if (visited.contains(u))
+                continue;
+            if(u==n) {
+                System.out.println(w);
+                return;
+            }
+            visited.add(u);
+            for (long vw : g.get(u)) {
+                long v = vw%Integer.MAX_VALUE;
+                long w2 = vw/Integer.MAX_VALUE;
+                if (!visited.contains(v)) {
+                    pq.add(Math.max(w,w2)*Integer.MAX_VALUE+v);
+                }
+            }
+        }
+        System.out.println("NO PATH EXISTS");
+    }
+}
