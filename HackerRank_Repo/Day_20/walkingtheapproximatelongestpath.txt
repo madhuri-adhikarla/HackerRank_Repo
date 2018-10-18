@@ -1,0 +1,78 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static long startTime;
+    public static ArrayList<Integer>[] a;
+    public static void main(String[] args) {
+        startTime=System.currentTimeMillis();
+        Scanner sc=new Scanner(System.in);
+        n=sc.nextInt();
+        int m=sc.nextInt();
+        a=new ArrayList[n];
+        for(int c1=0;c1<n;c1++)
+            a[c1]=new ArrayList<Integer>();
+        for(int c1=0;c1<m;c1++)
+        {
+            int a1=sc.nextInt()-1;
+            int a2=sc.nextInt()-1;
+            a[a1].add(a2);
+            a[a2].add(a1);
+        }
+        lpathd=new int[n+2];        
+        p=new int[n+2];
+        v=new int[n];
+        for(int c1=0;c1<n;c1++){
+            p[0]=c1;
+            v[c1]=1;
+            longest(c1,1);
+            v[c1]=0;
+            p[0]=0;
+        }
+        System.out.println(lpath);
+        for(int c1=0;c1<lpath;c1++) System.out.print((lpathd[c1]+1)+" ");
+    }
+    
+    static int n=0;
+    static long iter=0;
+    static int lpath=0;
+    static int[] lpathd;
+    static int[] p;
+    static int[] v;
+    static boolean done=false;
+    public static void longest(int c,int l)
+    {
+        if(done)    return;
+        iter++;
+        //for(int c1=0;c1<l;c1++) System.out.print(p[c1]+" ");
+        //System.out.println("");
+        if(l>n+1)   return;        
+        if(iter%10000==0){            
+            if(System.currentTimeMillis()-startTime>3500){
+                done=true;
+            }            
+        }
+        if(l>lpath)
+        {
+            lpath=l;
+            for(int c1=0;c1<l;c1++) lpathd[c1]=p[c1];
+        }        
+        for(int c1:a[c])
+        {
+            if(c==c1)   continue;
+            if(v[c1]==0)
+            {
+                v[c1]=1;            
+                p[l]=c1;
+                //System.out.println("c1:\t"+c1);
+                longest(c1,l+1);
+                p[l]=0;                
+                v[c1]=0;
+            }
+        }
+    }
+}
