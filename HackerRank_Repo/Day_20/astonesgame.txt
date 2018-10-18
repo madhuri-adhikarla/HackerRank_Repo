@@ -1,0 +1,34 @@
+import java.util.Scanner;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            int num = sc.nextInt();
+            if ((num & 1) == 1) System.out.println(1);
+            else solve(num);
+        }
+        sc.close();
+    }
+
+    public static void solve(int n) {
+        int msb = Integer.SIZE - Integer.numberOfLeadingZeros(n);
+        int xor = (n & 1) == 1 ? 1 : 1 ^ msb;
+        int sol = Integer.MAX_VALUE;
+        for (int i = 1; i <= msb; ++i) {
+            int val = 1 << (i - 1);
+            if (((xor ^ i) < i) && (val <= n)) {
+                int off = xor ^ i;
+                int curr = 0;
+                if (off != 0) {
+                    if (i - off == 1) curr = 1 << (off - 1);
+                    else curr = (1 << off) - 1;
+                }
+                if (sol > val - curr) sol = val - curr;
+            }
+        }
+        System.out.println(sol);
+    }
+}
