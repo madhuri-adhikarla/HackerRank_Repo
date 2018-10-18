@@ -1,0 +1,82 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+  
+    static int closestOpposite(int[] arr, long q){
+        int current = arr.length/2;
+        int jumpLen = (arr.length/4)+1;
+        long reqNum = -q;
+        while(jumpLen > 0){
+            if(arr[current]< reqNum){
+                current+= jumpLen;
+            }else if(arr[current]> reqNum){
+                current-=jumpLen;
+            }
+            jumpLen=jumpLen/2;
+        }
+        if(arr[current]<reqNum){
+        	while(current<arr.length && arr[current]<reqNum)
+        		current++;
+        	if(current==arr.length)
+        		return current-1;
+        	if(current!=0 && (arr[current]- reqNum > reqNum-arr[current-1]) )
+        		return current-1;
+        	else
+        		return current;
+        }else if(arr[current]>reqNum){
+        	while(current>=0 && arr[current]>reqNum)
+        		current--;
+        	if(current==-1)
+        		return 0;
+        	if(current!=0 && (arr[current+1]- reqNum > reqNum-arr[current]) )
+        		return current+1;
+        	else
+        		return current;
+        }else 	
+        	return current;
+    }
+    
+    public static void main(String[] args) {
+     Scanner in = new Scanner(System.in);
+     int N = in.nextInt();
+     int[] arr = new int[N];
+        long[] preSum = new long[N];
+        long sum =0l;
+        for(int i=0;i<N;i++){
+            arr[i]=in.nextInt();
+        }
+        Arrays.sort(arr);
+        for(int i=0;i<N;i++){
+            sum +=arr[i];
+            preSum[i]=sum;
+        }
+        int Q = in.nextInt();
+        int[] q = new int[Q];
+        long[] preQ = new long[Q];
+        for(int i=0;i<Q;i++){
+            q[i]=in.nextInt();
+        }
+        sum=0;
+        for(int i=0;i<Q;i++){
+            sum +=q[i];
+            preQ[i]=sum;
+            int index = closestOpposite(arr, preQ[i]);
+            long leftSideSum = 0l;
+            if(index != 0){
+                leftSideSum = Math.abs(preSum[index-1] + preQ[i]*index);
+            }
+            long rightSideSum = 0l;
+            if(index !=N-1){
+                rightSideSum = Math.abs(preSum[N-1]- preSum[index]+preQ[i]*(N-1-index));
+            }
+            long indexSum = Math.abs(arr[index]+preQ[i]);
+            System.out.println(leftSideSum+rightSideSum+indexSum);
+        }
+    }
+
+}
