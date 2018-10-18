@@ -1,0 +1,69 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+   static HashMap<Integer, LinkedList<Integer>> rep = new HashMap<>();
+   static TreeSet<Integer> set = new TreeSet<>();
+   public static void main(String[] args) throws Exception{
+        BufferedReader bfr = new BufferedReader(new InputStreamReader(System.in));
+        String[] temp = bfr.readLine().split(" ");
+        int N = Integer.parseInt(temp[0]);
+        int I = Integer.parseInt(temp[1]);
+      
+
+        for(int i = 0; i < I; i++){
+            temp = bfr.readLine().split(" ");
+            int a = Integer.parseInt(temp[0]);
+            int b = Integer.parseInt(temp[1]);
+            
+            if(!rep.containsKey(a)) {
+                rep.put(a, new LinkedList<Integer>());
+            } 
+            
+            if(!rep.containsKey(b)) {
+                rep.put(b, new LinkedList<Integer>());
+            }
+            rep.get(a).add(b);
+            rep.get(b).add(a);
+          // Store a and b in an appropriate data structure of your choice
+        }
+
+        
+        long combinations = 0;
+        long sum = 0;
+        for(int i=0; i<N; i++) {
+            if(!set.contains(i)) {
+                long x = connected(i);
+
+                combinations += sum * x;
+                sum += x;
+            }        
+        }
+        
+        // Compute the final answer - the number of combinations
+       
+        System.out.println(combinations);
+
+    }
+    
+    static int connected(int a) {
+        int res = 1;
+        set.add(a);
+        LinkedList<Integer> q = new LinkedList<Integer>();
+        q.add(a);
+        while(!q.isEmpty()) {
+            int n = q.poll();
+            LinkedList<Integer> l = rep.get(n);
+            if(l == null) break;
+            for(int i=0; i<l.size(); i++) {
+                int b = l.get(i);
+                if(!set.contains(b)) {
+                    q.add(b);
+                    set.add(b);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+}
