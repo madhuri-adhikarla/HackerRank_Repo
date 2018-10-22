@@ -25,40 +25,27 @@ function readLine() {
 }
 
 // Complete the serviceLane function below.
-function serviceLane(n, cases, width) {
-    // Complete this function
-    var m = cases.length;
-    var ans = [];
-    for(var x=0;x<m;x++){
-        var c1 = cases[x][0];
-        var c2 = cases[x][1];
-        var len = c2 - c1 + 1;
-        var truck = 0, flag = 0;
-        for(var i=c1;i<=c2;i++){
-            var w = width[i];
-            if(w == 1){
-                flag = 1;
-                break;
-            }
-            if(w == 3){
-                truck++;
-            }
-        }
-        if(flag == 0){
-            if(truck == len){
-                ans.push(3);
-            }
-            else {
-                ans.push(2)
-            }
-        } else {
-            ans.push(1)
-        }
-        
-    }
+function serviceLane(n,width, cases) {
     
-    return ans
-    
+    var res=[cases.length];
+        for(var i=0;i<cases.length;i++)
+        {
+            var p=cases[i][0];
+            var q=cases[i][1];
+            var copy=width.slice(p,q+1);
+            var min=1000;
+            for(var j=0;j<copy.length;j++)
+            {
+                if(min>copy[j])
+                {
+                    min=copy[j];
+                }
+            }
+            res[i]=min;
+        }
+        return res;
+
+
 }
 
 function main() {
@@ -78,7 +65,7 @@ function main() {
         cases[i] = readLine().split(' ').map(casesTemp => parseInt(casesTemp, 10));
     }
 
-    let result = serviceLane(n, cases, width);
+    let result = serviceLane(n,width, cases);
 
     ws.write(result.join("\n") + "\n");
 
